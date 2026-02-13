@@ -1,0 +1,10 @@
+# Vercel ignore file - overrides .gitignore for deployments
+# NOTE: dist is intentionally NOT listed here so it gets uploaded
+
+node_modules
+server
+.git
+*.log
+.DS_Store
+.vscode
+.idea

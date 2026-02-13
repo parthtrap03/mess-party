@@ -1,0 +1,35 @@
+services:
+  # 1. Backend Service (Web Service)
+  - type: web
+    name: mess-backend
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: ADMIN_PASSKEY
+        generateValue: true
+      - key: PARTY_PASSKEY
+        value: welcome
+      - key: REQUIRED_GUESTS
+        value: 9
+
+  # 2. Frontend Service (Static Site)
+  - type: static
+    name: mess-frontend
+    env: static
+    plan: free
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    routes:
+      # Proxy all /api calls to the backend
+      - type: rewrite
+        source: /api/*
+        destination: ${mess-backend.url}/api/*
+      # Handle React Router (SPA)
+      - type: rewrite
+        source: /*
+        destination: /index.html
