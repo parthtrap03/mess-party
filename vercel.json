@@ -1,7 +1,5 @@
 {
-    "framework": null,
-    "buildCommand": "echo 'Build already completed locally'",
-    "installCommand": "echo 'Skipping install'",
+    "framework": "vite",
     "outputDirectory": "dist",
     "rewrites": [
         {
